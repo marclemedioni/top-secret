@@ -1,0 +1,8 @@
+{
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json",
+  "version": 2,
+  "projects": {
+    "top-secret": "apps/top-secret",
+    "top-secret-e2e": "apps/top-secret-e2e"
+  }
+}
