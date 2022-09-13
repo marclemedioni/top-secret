@@ -34,8 +34,8 @@ services:
     # Uncomment to change startup options
     environment:
       POSTGRES_PASSWORD: password
-    #  POSTGRES_USERNAME: root
-    #  POSTGRES_DATABASE: your-database-here
+      POSTGRES_USER: root
+      POSTGRES_DB: top-secret
 
     # Add "forwardPorts": ["27017"] to **devcontainer.json** to forward MongoDB locally.
     # (Adding the "ports" property to this file will not forward from a Codespace.)

@@ -3,6 +3,7 @@ ARG VARIANT=16
 FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:0-${VARIANT}
 
 RUN npm install -g nx@latest
+RUN npm install -g prisma
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
