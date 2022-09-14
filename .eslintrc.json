@@ -32,7 +32,7 @@
             ],
             "pathGroups": [
               {
-                "pattern": "@docorga/**",
+                "pattern": "@top-secret/**",
                 "group": "external",
                 "position": "after"
               }
