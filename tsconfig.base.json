@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@top-secret/chats": ["libs/chats/src/index.ts"]
+      "@top-secret/chats": ["libs/chats/src/index.ts"],
+      "@top-secret/ui": ["libs/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

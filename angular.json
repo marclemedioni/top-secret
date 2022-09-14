@@ -5,6 +5,7 @@
     "api": "apps/api",
     "chats": "libs/chats",
     "top-secret": "apps/top-secret",
-    "top-secret-e2e": "apps/top-secret-e2e"
+    "top-secret-e2e": "apps/top-secret-e2e",
+    "ui": "libs/ui"
   }
 }
