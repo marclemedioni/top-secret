@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 
+import { AuthService } from '@top-secret/auth';
+
 @Component({
-  selector: 'top-secret-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  selector: 'ts-root',
+  templateUrl: 'app.component.html',
 })
 export class AppComponent {
-  title = 'top-secret';
+  constructor(public auth: AuthService) {}
 }

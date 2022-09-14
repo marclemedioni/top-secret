@@ -18,12 +18,18 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["apps/top-secret-e2e/**/*.{js,ts}"]
+        "lintFilePatterns": [
+          "apps/top-secret-e2e/**/*.{js,ts}"
+        ]
       }
     }
   },
   "tags": [],
-  "implicitDependencies": ["top-secret"]
+  "implicitDependencies": [
+    "top-secret"
+  ]
 }

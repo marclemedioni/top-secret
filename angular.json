@@ -3,9 +3,10 @@
   "version": 2,
   "projects": {
     "api": "apps/api",
-    "chats": "libs/chats",
+    "auth": "libs/auth",
+    "layout": "libs/layout",
+    "main": "libs/main",
     "top-secret": "apps/top-secret",
-    "top-secret-e2e": "apps/top-secret-e2e",
-    "ui": "libs/ui"
+    "top-secret-e2e": "apps/top-secret-e2e"
   }
 }
