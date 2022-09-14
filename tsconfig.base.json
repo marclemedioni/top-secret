@@ -16,10 +16,10 @@
     "baseUrl": ".",
     "paths": {
       "@top-secret/auth": ["libs/auth/src/index.ts"],
-      "@top-secret/chats": ["libs/chats/src/index.ts"],
       "@top-secret/layout": ["libs/layout/src/index.ts"],
       "@top-secret/main": ["libs/main/src/index.ts"],
-      "@top-secret/ui": ["libs/ui/src/index.ts"]
+      "@top-secret/ui": ["libs/ui/src/index.ts"],
+      "@top-secret/users": ["libs/users/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

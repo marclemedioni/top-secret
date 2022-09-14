@@ -7,6 +7,7 @@
     "layout": "libs/layout",
     "main": "libs/main",
     "top-secret": "apps/top-secret",
-    "top-secret-e2e": "apps/top-secret-e2e"
+    "top-secret-e2e": "apps/top-secret-e2e",
+    "users": "libs/users"
   }
 }
