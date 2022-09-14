@@ -17,19 +17,31 @@ model  User {
   password  String
   phone     String    @unique
   isAdmin   Boolean   @default(false)
-  messages  Chat[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @default(now())
-  Chat      Chat[]    @relation("RecieverOfChat")
+  Chat      Chat[]    @relation("ReceiverOfChat")
+  messages 	Chat[] 	  @relation("SenderOfChat")
 }
 
 model  Chat {
-id         Int       @id  @default(autoincrement())
-receiverId Int
-receiver   User      @relation("RecieverOfChat", fields: [receiverId], references: [id])
-sender     User      @relation(fields: [senderId], references: [id])
-senderId   Int
-message    String
-createdAt  DateTime  @default(now())
-updatedAt  DateTime  @default(now())
+  id         Int       @id @default(autoincrement())
+  receiverId Int
+  receiver   User      @relation("ReceiverOfChat", fields: [receiverId], references: [id])
+  sender     User      @relation("SenderOfChat", fields: [senderId], references: [id])
+  senderId   Int
+  title		 String
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @default(now())
+  messages   Message[] @relation("ReceiverOfMessages")
+}
+
+model Message {
+  id 		 Int	   @id @default(autoincrement())
+  chatId	 Int
+  chat		 Chat	   @relation("ReceiverOfMessages", fields: [chatId], references: [id])
+  content	 String
+  isRead	 Boolean   @default(false)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @default(now())
+  isRemoved  Boolean   @default(false)
 }
