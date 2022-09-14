@@ -1,7 +1,7 @@
 {
   "root": true,
   "ignorePatterns": ["**/*"],
-  "plugins": ["@nrwl/nx"],
+  "plugins": ["@nrwl/nx", "import"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
@@ -17,6 +17,27 @@
                 "onlyDependOnLibsWithTags": ["*"]
               }
             ]
+          }
+        ],
+        "import/order": [
+          "warn", {
+            "alphabetize": { "order": "asc" },
+            "newlines-between": "always",
+            "groups": [
+              ["builtin"],
+              ["external"],
+              ["internal"],
+              ["unknown"],
+              ["parent", "sibling"]
+            ],
+            "pathGroups": [
+              {
+                "pattern": "@docorga/**",
+                "group": "external",
+                "position": "after"
+              }
+            ],
+            "pathGroupsExcludedImportTypes": ["builtin"]
           }
         ]
       }
