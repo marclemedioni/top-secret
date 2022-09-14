@@ -26,12 +26,12 @@ export class IfLoggedInDirective {
     this.update();
   }
 
-  get ifLoggedIn() {
+  get tsIfLoggedIn() {
     return this.#tsIfLoggedIn ?? true;
   }
 
   update() {
-    //TODO implement logic
+    // TODO: implement logic
     const loggedIn = true;
     if ((this.tsIfLoggedIn && loggedIn) || (!this.tsIfLoggedIn && !loggedIn)) {
       this.render();
