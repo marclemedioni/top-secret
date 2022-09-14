@@ -13,7 +13,7 @@
   </div>
 
   <div slot="menu-content">
-    <mat-nav-list *ifLoggedIn="false">
+    <mat-nav-list *tsIfLoggedIn="false">
       <a mat-list-item routerLink="/">
         <i class="fa-solid fa-fw fa-home me-2"></i>
         Home
@@ -24,7 +24,7 @@
       </a>
     </mat-nav-list>
 
-    <mat-nav-list *ifLoggedIn="true">
+    <mat-nav-list *tsIfLoggedIn="true">
       <a mat-list-item routerLink="/dashboard">
         <i class="fa-solid fa-fw fa-desktop me-2"></i>
         Dashboard

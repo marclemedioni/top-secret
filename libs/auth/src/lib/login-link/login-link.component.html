@@ -6,7 +6,7 @@
 </ng-container>
 
 <ng-container *ngIf="displayLogin$ | async">
-  <a *ifLoggedIn="false" routerLink="/login">
+  <a *tsIfLoggedIn="false" routerLink="/login">
     <i class="fa-solid fa-sign-in-alt me-2"></i>
     Login
   </a>

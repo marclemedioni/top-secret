@@ -1,15 +1,24 @@
+
+
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { CanActivate, CanActivateChild, CanLoad, Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class LoggedInGuard implements CanActivate {
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
+export class LoggedInGuard implements CanActivate, CanActivateChild, CanLoad {
+  constructor(private router: Router) {}
+
+  canActivate() {
+    //TODO
+    return true
   }
-  
+
+  canActivateChild() {
+    return this.canActivate();
+  }
+
+  canLoad() {
+    return this.canActivate();
+  }
 }
