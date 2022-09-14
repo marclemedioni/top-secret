@@ -4,17 +4,15 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>
+    <mat-toolbar color="primary">
       <ng-content select="[slot=menu-toolbar]"></ng-content>
     </mat-toolbar>
-
-    <hr class="m-0">
 
     <ng-content select="[slot=menu-content]"></ng-content>
   </mat-sidenav>
 
   <mat-sidenav-content style="min-height: 100vh">
-    <mat-toolbar class="bg-primary">
+    <mat-toolbar color="primary">
       <button
         class="me-3"
         type="button"
