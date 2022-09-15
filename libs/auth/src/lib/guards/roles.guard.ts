@@ -1,15 +1,54 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { CanActivate, CanActivateChild, CanLoad, Router } from '@angular/router';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class RolesGuard implements CanActivate {
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
+import { Role } from '@ts/api-interfaces';
+
+import { AuthService } from '../auth.service';
+
+export class RolesGuard {
+  static has(...roles: Array<keyof typeof Role>) {
+    @Injectable({
+      providedIn: 'root',
+    })
+    class HasRoles implements CanActivate, CanActivateChild, CanLoad {
+      constructor(private auth: AuthService, private router: Router) {}
+
+      canActivate() {
+        return this.auth.userHasRole(roles as string[]) ? true : this.router.parseUrl('/login');
+      }
+
+      canActivateChild() {
+        return this.canActivate();
+      }
+
+      canLoad() {
+        return this.canActivate();
+      }
+    }
+
+    return HasRoles;
   }
-  
+
+  static not(...roles: string[]) {
+    @Injectable({
+      providedIn: 'root',
+    })
+    class NotRoles implements CanActivate, CanActivateChild, CanLoad {
+      constructor(private auth: AuthService, private router: Router) {}
+
+      canActivate() {
+        return this.auth.userNotInRole(roles as string[]) ? true : this.router.parseUrl('/login');
+      }
+
+      canActivateChild() {
+        return this.canActivate();
+      }
+
+      canLoad() {
+        return this.canActivate();
+      }
+    }
+
+    return NotRoles;
+  }
 }

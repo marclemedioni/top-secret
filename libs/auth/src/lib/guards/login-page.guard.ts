@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { CanActivate, Router } from '@angular/router';
+
+import { Environment } from '@ts/common';
+import { loggedInVar } from '@ts/graphql/client';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoginPageGuard implements CanActivate {
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
+  constructor(private router: Router, private env: Environment) {}
+
+  canActivate() {
+    return loggedInVar() ? this.router.parseUrl(this.env.url.loginRedirect) : true;
   }
-  
 }

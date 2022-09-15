@@ -3,11 +3,11 @@ import { Directive, EmbeddedViewRef, Input, TemplateRef, ViewContainerRef } from
 import { Environment } from '@ts/common';
 
 @Directive({
-  selector: '[ifPublicRegistration]',
+  selector: '[tsIfPublicRegistration]',
 })
 export class IfPublicRegistrationDirective {
   #embededViewRef: EmbeddedViewRef<any> | undefined;
-  #ifPublicRegistration?: boolean | '';
+  #tsIfPublicRegistration?: boolean | '';
 
   constructor(
     private templateRef: TemplateRef<any>,
@@ -18,19 +18,19 @@ export class IfPublicRegistrationDirective {
   }
 
   @Input()
-  set ifPublicRegistration(value: boolean | '' | undefined) {
-    this.#ifPublicRegistration = value;
+  set tsIfPublicRegistration(value: boolean | '' | undefined) {
+    this.#tsIfPublicRegistration = value;
     this.update();
   }
 
-  get ifPublicRegistration() {
-    return this.#ifPublicRegistration ?? true;
+  get tsIfPublicRegistration() {
+    return this.#tsIfPublicRegistration ?? true;
   }
 
   update() {
     if (
-      (this.ifPublicRegistration && this.env.publicRegistration) ||
-      (!this.ifPublicRegistration && !this.env.publicRegistration)
+      (this.tsIfPublicRegistration && this.env.publicRegistration) ||
+      (!this.tsIfPublicRegistration && !this.env.publicRegistration)
     ) {
       this.render();
     } else {

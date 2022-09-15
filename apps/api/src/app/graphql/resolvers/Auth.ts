@@ -45,7 +45,6 @@ export const typeDefs = gql`
     rules: [Json!]!
   }
 
-
   type AccountInfo {
     name: String
     hasPassword: Boolean!
@@ -79,7 +78,6 @@ export const typeDefs = gql`
     name: String!
     email: String!
     password: String!
-    phone: String!
   }
 `;
 
@@ -215,21 +213,20 @@ export class AuthResolver {
         name: args.name,
         email: args.email,
         password: hashedPassword,
-        phone: args.phone,
-
+        phone: args.phone
       },
     });
 
     if (this.config.production) {
       this.mail.sendGeneral({
         to: user.email,
-        subject: `Confirmation d'inscription`,
+        subject: 'Sign Up Confirmed',
         context: {
           siteUrl: this.config.siteUrl,
-          hiddenPreheaderText: `Bonjour ${user.name}, votre compte à bien été créé`,
-          header: 'Bienvenue',
-          subHeading: `Confirmation d'inscription`,
-          body: `Merci ! Nous espérons que que l'application vous plaira ${user.name}!`,
+          hiddenPreheaderText: `Sign up confirmed for ${user.name}`,
+          header: 'Welcome',
+          subHeading: 'Sign Up Confirmed',
+          body: `Thank you for signing up ${user.name}!`,
           footerHeader: '',
           footerBody: '',
         },

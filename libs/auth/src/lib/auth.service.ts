@@ -142,7 +142,6 @@ export class AuthService {
   }
 
   userHasRole(role: string | string[]) {
-    console.log(this.roles)
     if (role) {
       if (typeof role === 'string') return this.roles.some(r => r === role);
       else return this.roles.some(r => role.includes(r));

@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { CanActivate, Router } from '@angular/router';
+
+import { Environment } from '@ts/common';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PublicRegistrationGuard implements CanActivate {
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
-  }
+  constructor(private router: Router, private env: Environment) {}
 
+  canActivate() {
+    return this.env.publicRegistration ? true : this.router.parseUrl('/');
+  }
 }
