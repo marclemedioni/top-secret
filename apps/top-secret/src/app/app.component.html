@@ -1,7 +1,7 @@
 <ts-layout>
   <div slot="toolbar-start" >
-    <i class="fa-solid fa-dice-d20 me-2"></i>
-    Top-Secret
+    <i class="fa-solid fa-lock me-2"></i>
+    Top-secret
   </div>
 
   <div slot="toolbar-end">
@@ -35,7 +35,7 @@
         Settings
       </a>
 
-      <a mat-list-item routerLink="/super" *roles="'Super'">
+      <a mat-list-item routerLink="/super" *tsRoles="['Super']">
         <i class="fa-solid fa-fw fa-user-shield me-2"></i>
         Super
       </a>

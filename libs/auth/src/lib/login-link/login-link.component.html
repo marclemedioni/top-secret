@@ -1,5 +1,5 @@
 <ng-container *ngIf="displayLogout">
-  <span *ifLoggedIn="true" (click)="auth.logout()" style="cursor: pointer;">
+  <span *tsIfLoggedIn="true" (click)="auth.logout()" style="cursor: pointer;">
     <i class="fa-solid fa-lock me-2"></i>
     Logout
   </span>

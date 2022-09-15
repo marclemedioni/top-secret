@@ -2,22 +2,29 @@ import {
   Directive,
   EmbeddedViewRef,
   Input,
+  OnDestroy,
   TemplateRef,
   ViewContainerRef,
 } from '@angular/core';
+import { Subscription } from 'rxjs';
+
+import { LoggedInGQL } from '@ts/graphql';
+import { loggedInVar } from '@ts/graphql/client';
 
 @Directive({
   selector: '[tsIfLoggedIn]',
 })
-export class IfLoggedInDirective {
+export class IfLoggedInDirective implements OnDestroy {
+  #subsciption: Subscription;
   #embededViewRef: EmbeddedViewRef<any> | undefined;
   #tsIfLoggedIn?: boolean;
 
   constructor(
     private templateRef: TemplateRef<any>,
     private viewContainer: ViewContainerRef,
+    private loggedInGQL: LoggedInGQL
   ) {
-
+    this.#subsciption = this.loggedInGQL.watch().valueChanges.subscribe(() => this.update());
   }
 
   @Input()
@@ -31,8 +38,7 @@ export class IfLoggedInDirective {
   }
 
   update() {
-    // TODO: implement logic
-    const loggedIn = true;
+    const loggedIn = loggedInVar();
     if ((this.tsIfLoggedIn && loggedIn) || (!this.tsIfLoggedIn && !loggedIn)) {
       this.render();
     } else {
@@ -48,5 +54,9 @@ export class IfLoggedInDirective {
   clear() {
     this.viewContainer.clear();
     this.#embededViewRef = undefined;
+  }
+
+  ngOnDestroy() {
+    this.#subsciption.unsubscribe();
   }
 }

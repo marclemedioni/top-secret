@@ -3,7 +3,11 @@
   "version": 2,
   "projects": {
     "api": "apps/api",
+    "api-interfaces": "libs/api-interfaces",
     "auth": "libs/auth",
+    "common": "libs/common",
+    "components": "libs/components",
+    "graphql": "libs/graphql",
     "layout": "libs/layout",
     "main": "libs/main",
     "top-secret": "apps/top-secret",

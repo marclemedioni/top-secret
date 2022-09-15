@@ -6,6 +6,7 @@
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
+        "@typescript-eslint/no-explicit-any": 0,
         "@nrwl/nx/enforce-module-boundaries": [
           "error",
           {
@@ -32,7 +33,7 @@
             ],
             "pathGroups": [
               {
-                "pattern": "@top-secret/**",
+                "pattern": "@ts/**",
                 "group": "external",
                 "position": "after"
               }

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-
-import { AuthService } from '@top-secret/auth';
+import { AuthService } from '@ts/auth';
 
 @Component({
   selector: 'ts-root',
