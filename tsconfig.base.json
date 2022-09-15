@@ -22,6 +22,7 @@
       "@ts/components": ["libs/components/src/index.ts"],
       "@ts/graphql": ["libs/graphql/src/index.ts"],
       "@ts/graphql/client": ["libs/graphql/src/lib/client/index.ts"],
+      "@ts/graphql/fields": ["libs/graphql/src/lib/fields/index.ts"],
       "@ts/layout": ["libs/layout/src/index.ts"],
       "@ts/main": ["libs/main/src/index.ts"],
       "@ts/ui": ["libs/ui/src/index.ts"],

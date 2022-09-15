@@ -32,19 +32,16 @@ export const environment: EnvironmentBase = {
   },
   expiresInRememberMe: 7_776_000, // 90 days (in seconds)
   mail: {
-    // Docs: https://nodemailer.com/smtp/
     transport: {
-      host: process.env.SMTP_SERVER,
-      port: 587,
-      secure: false, // true for port 465, false for other ports
-      auth: {
-        user: process.env.SMTP_LOGIN,
-        pass: process.env.SMTP_PASSWORD,
-      },
+      host: 'localhost',
+      port: 1025,
+      ignoreTLS: true,
+      secure: false,
     },
     defaults: {
-      from: `"${process.env.SMTP_FROM_NAME}" <${process.env.SMTP_FROM_EMAIL}>`,
+      from: '"No Reply" <no-reply@localhost>',
     },
+    preview: true,
   },
   throttle: {
     limit: 2,
