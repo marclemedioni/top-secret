@@ -12,44 +12,44 @@ import { GraphQLResolveInfo } from 'graphql';
 import { CaslSubject, GqlCaslGuard } from '../../auth';
 import { PrismaSelectArgs } from '../../prisma';
 import { IContext } from '../models';
-import resolvers from '../paljs/User/resolvers';
+import resolvers from '../paljs/Chat/resolvers';
 import type {
-  AggregateUserArgs,
-  CreateOneUserArgs,
-  DeleteManyUserArgs,
-  DeleteOneUserArgs,
-  FindFirstUserArgs,
-  FindManyUserArgs,
-  FindUniqueUserArgs,
-  UpdateManyUserArgs,
-  UpdateOneUserArgs,
-  UpsertOneUserArgs,
+  AggregateChatArgs,
+  CreateOneChatArgs,
+  DeleteManyChatArgs,
+  DeleteOneChatArgs,
+  FindFirstChatArgs,
+  FindManyChatArgs,
+  FindUniqueChatArgs,
+  UpdateManyChatArgs,
+  UpdateOneChatArgs,
+  UpsertOneChatArgs,
 } from '../resolversTypes';
 
 export const typeDefs = null;
 // export const typeDefs = gql`
 //   extend type Query {
-//     sampleUserQuery: User
+//     sampleChatQuery: Chat
 //   }
 //   extend type Mutation {
-//     sampleUserMutation(args: Int!): Boolean
+//     sampleChatMutation(args: Int!): Boolean
 //   }
-//   extend type User {
-//     sampleUserField: String
+//   extend type Chat {
+//     sampleChatField: String
 //   }
 // `;
 
-@Resolver('User')
-@CaslSubject('User')
-export class UserResolver {
+@Resolver('Chat')
+@CaslSubject('Chat')
+export class ChatResolver {
   @Query()
   @UseGuards(GqlCaslGuard('read'))
-  async findUniqueUser(
-    @Args() args: FindUniqueUserArgs,
+  async findUniqueChat(
+    @Args() args: FindUniqueChatArgs,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Query.findUniqueUser(
+    return resolvers.Query.findUniqueChat(
       undefined,
       PrismaSelectArgs(info, args),
       ctx,
@@ -59,12 +59,12 @@ export class UserResolver {
 
   @Query()
   @UseGuards(GqlCaslGuard('read'))
-  async findFirstUser(
-    @Args() args: FindFirstUserArgs,
+  async findFirstChat(
+    @Args() args: FindFirstChatArgs,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Query.findFirstUser(
+    return resolvers.Query.findFirstChat(
       undefined,
       PrismaSelectArgs(info, args),
       ctx,
@@ -74,12 +74,12 @@ export class UserResolver {
 
   @Query()
   @UseGuards(GqlCaslGuard('read'))
-  async findManyUser(
-    @Args() args: FindManyUserArgs,
+  async findManyChat(
+    @Args() args: FindManyChatArgs,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Query.findManyUser(
+    return resolvers.Query.findManyChat(
       undefined,
       PrismaSelectArgs(info, args),
       ctx,
@@ -89,12 +89,12 @@ export class UserResolver {
 
   @Query()
   @UseGuards(GqlCaslGuard('read'))
-  async findManyUserCount(
-    @Args() args: FindManyUserArgs,
+  async findManyChatCount(
+    @Args() args: FindManyChatArgs,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Query.findManyUserCount(
+    return resolvers.Query.findManyChatCount(
       undefined,
       PrismaSelectArgs(info, args),
       ctx,
@@ -104,12 +104,12 @@ export class UserResolver {
 
   @Query()
   @UseGuards(GqlCaslGuard('read'))
-  async aggregateUser(
-    @Args() args: AggregateUserArgs,
+  async aggregateChat(
+    @Args() args: AggregateChatArgs,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Query.aggregateUser(
+    return resolvers.Query.aggregateChat(
       undefined,
       PrismaSelectArgs(info, args),
       ctx,
@@ -119,12 +119,12 @@ export class UserResolver {
 
   @Mutation()
   @UseGuards(GqlCaslGuard('create'))
-  async createOneUser(
-    @Args() args: CreateOneUserArgs,
+  async createOneChat(
+    @Args() args: CreateOneChatArgs,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Mutation.createOneUser(
+    return resolvers.Mutation.createOneChat(
       undefined,
       PrismaSelectArgs(info, args),
       ctx,
@@ -134,12 +134,12 @@ export class UserResolver {
 
   @Mutation()
   @UseGuards(GqlCaslGuard('update'))
-  async updateOneUser(
-    @Args() args: UpdateOneUserArgs,
+  async updateOneChat(
+    @Args() args: UpdateOneChatArgs,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Mutation.updateOneUser(
+    return resolvers.Mutation.updateOneChat(
       undefined,
       PrismaSelectArgs(info, args),
       ctx,
@@ -149,12 +149,12 @@ export class UserResolver {
 
   @Mutation()
   @UseGuards(GqlCaslGuard('update'))
-  async updateManyUser(
-    @Args() args: UpdateManyUserArgs,
+  async updateManyChat(
+    @Args() args: UpdateManyChatArgs,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Mutation.updateManyUser(
+    return resolvers.Mutation.updateManyChat(
       undefined,
       PrismaSelectArgs(info, args),
       ctx,
@@ -164,12 +164,12 @@ export class UserResolver {
 
   @Mutation()
   @UseGuards(GqlCaslGuard('create', 'update'))
-  async upsertOneUser(
-    @Args() args: UpsertOneUserArgs,
+  async upsertOneChat(
+    @Args() args: UpsertOneChatArgs,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Mutation.upsertOneUser(
+    return resolvers.Mutation.upsertOneChat(
       undefined,
       PrismaSelectArgs(info, args),
       ctx,
@@ -179,12 +179,12 @@ export class UserResolver {
 
   @Mutation()
   @UseGuards(GqlCaslGuard('delete'))
-  async deleteOneUser(
-    @Args() args: DeleteOneUserArgs,
+  async deleteOneChat(
+    @Args() args: DeleteOneChatArgs,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Mutation.deleteOneUser(
+    return resolvers.Mutation.deleteOneChat(
       undefined,
       PrismaSelectArgs(info, args),
       ctx,
@@ -194,12 +194,12 @@ export class UserResolver {
 
   @Mutation()
   @UseGuards(GqlCaslGuard('delete'))
-  async deleteManyUser(
-    @Args() args: DeleteManyUserArgs,
+  async deleteManyChat(
+    @Args() args: DeleteManyChatArgs,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Mutation.deleteManyUser(
+    return resolvers.Mutation.deleteManyChat(
       undefined,
       PrismaSelectArgs(info, args),
       ctx,

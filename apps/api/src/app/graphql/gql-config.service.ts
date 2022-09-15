@@ -17,12 +17,17 @@ import { ALL_TYPE_DEFS } from './resolvers';
 
 @Injectable()
 export class GqlConfigService implements GqlOptionsFactory {
-  constructor(private readonly config: ConfigService, private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly config: ConfigService,
+    private readonly prisma: PrismaService
+  ) {}
 
   createGqlOptions(): ApolloDriverConfig {
     const plugins: PluginDefinition[] = [];
-    if (this.config.graphql.sandbox) plugins.push(ApolloServerPluginLandingPageLocalDefault);
-    if (!this.config.graphql.trace) plugins.push(ApolloServerPluginInlineTraceDisabled());
+    if (this.config.graphql.sandbox)
+      plugins.push(ApolloServerPluginLandingPageLocalDefault);
+    if (!this.config.graphql.trace)
+      plugins.push(ApolloServerPluginInlineTraceDisabled());
 
     return {
       typeDefs: print(ALL_TYPE_DEFS),

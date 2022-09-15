@@ -1,4 +1,4 @@
-import { IsEmail, IsPassportNumber, IsPhoneNumber, isPhoneNumber, Length } from 'class-validator';
+import { IsEmail, IsPhoneNumber, Length } from 'class-validator';
 
 import { ApiConstants } from '@ts/api-interfaces';
 

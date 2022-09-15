@@ -12,44 +12,44 @@ import { GraphQLResolveInfo } from 'graphql';
 import { CaslSubject, GqlCaslGuard } from '../../auth';
 import { PrismaSelectArgs } from '../../prisma';
 import { IContext } from '../models';
-import resolvers from '../paljs/User/resolvers';
+import resolvers from '../paljs/Message/resolvers';
 import type {
-  AggregateUserArgs,
-  CreateOneUserArgs,
-  DeleteManyUserArgs,
-  DeleteOneUserArgs,
-  FindFirstUserArgs,
-  FindManyUserArgs,
-  FindUniqueUserArgs,
-  UpdateManyUserArgs,
-  UpdateOneUserArgs,
-  UpsertOneUserArgs,
+  AggregateMessageArgs,
+  CreateOneMessageArgs,
+  DeleteManyMessageArgs,
+  DeleteOneMessageArgs,
+  FindFirstMessageArgs,
+  FindManyMessageArgs,
+  FindUniqueMessageArgs,
+  UpdateManyMessageArgs,
+  UpdateOneMessageArgs,
+  UpsertOneMessageArgs,
 } from '../resolversTypes';
 
 export const typeDefs = null;
 // export const typeDefs = gql`
 //   extend type Query {
-//     sampleUserQuery: User
+//     sampleMessageQuery: Message
 //   }
 //   extend type Mutation {
-//     sampleUserMutation(args: Int!): Boolean
+//     sampleMessageMutation(args: Int!): Boolean
 //   }
-//   extend type User {
-//     sampleUserField: String
+//   extend type Message {
+//     sampleMessageField: String
 //   }
 // `;
 
-@Resolver('User')
-@CaslSubject('User')
-export class UserResolver {
+@Resolver('Message')
+@CaslSubject('Message')
+export class MessageResolver {
   @Query()
   @UseGuards(GqlCaslGuard('read'))
-  async findUniqueUser(
-    @Args() args: FindUniqueUserArgs,
+  async findUniqueMessage(
+    @Args() args: FindUniqueMessageArgs,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Query.findUniqueUser(
+    return resolvers.Query.findUniqueMessage(
       undefined,
       PrismaSelectArgs(info, args),
       ctx,
@@ -59,12 +59,12 @@ export class UserResolver {
 
   @Query()
   @UseGuards(GqlCaslGuard('read'))
-  async findFirstUser(
-    @Args() args: FindFirstUserArgs,
+  async findFirstMessage(
+    @Args() args: FindFirstMessageArgs,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Query.findFirstUser(
+    return resolvers.Query.findFirstMessage(
       undefined,
       PrismaSelectArgs(info, args),
       ctx,
@@ -74,12 +74,12 @@ export class UserResolver {
 
   @Query()
   @UseGuards(GqlCaslGuard('read'))
-  async findManyUser(
-    @Args() args: FindManyUserArgs,
+  async findManyMessage(
+    @Args() args: FindManyMessageArgs,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Query.findManyUser(
+    return resolvers.Query.findManyMessage(
       undefined,
       PrismaSelectArgs(info, args),
       ctx,
@@ -89,12 +89,12 @@ export class UserResolver {
 
   @Query()
   @UseGuards(GqlCaslGuard('read'))
-  async findManyUserCount(
-    @Args() args: FindManyUserArgs,
+  async findManyMessageCount(
+    @Args() args: FindManyMessageArgs,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Query.findManyUserCount(
+    return resolvers.Query.findManyMessageCount(
       undefined,
       PrismaSelectArgs(info, args),
       ctx,
@@ -104,12 +104,12 @@ export class UserResolver {
 
   @Query()
   @UseGuards(GqlCaslGuard('read'))
-  async aggregateUser(
-    @Args() args: AggregateUserArgs,
+  async aggregateMessage(
+    @Args() args: AggregateMessageArgs,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Query.aggregateUser(
+    return resolvers.Query.aggregateMessage(
       undefined,
       PrismaSelectArgs(info, args),
       ctx,
@@ -119,12 +119,12 @@ export class UserResolver {
 
   @Mutation()
   @UseGuards(GqlCaslGuard('create'))
-  async createOneUser(
-    @Args() args: CreateOneUserArgs,
+  async createOneMessage(
+    @Args() args: CreateOneMessageArgs,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Mutation.createOneUser(
+    return resolvers.Mutation.createOneMessage(
       undefined,
       PrismaSelectArgs(info, args),
       ctx,
@@ -134,12 +134,12 @@ export class UserResolver {
 
   @Mutation()
   @UseGuards(GqlCaslGuard('update'))
-  async updateOneUser(
-    @Args() args: UpdateOneUserArgs,
+  async updateOneMessage(
+    @Args() args: UpdateOneMessageArgs,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Mutation.updateOneUser(
+    return resolvers.Mutation.updateOneMessage(
       undefined,
       PrismaSelectArgs(info, args),
       ctx,
@@ -149,12 +149,12 @@ export class UserResolver {
 
   @Mutation()
   @UseGuards(GqlCaslGuard('update'))
-  async updateManyUser(
-    @Args() args: UpdateManyUserArgs,
+  async updateManyMessage(
+    @Args() args: UpdateManyMessageArgs,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Mutation.updateManyUser(
+    return resolvers.Mutation.updateManyMessage(
       undefined,
       PrismaSelectArgs(info, args),
       ctx,
@@ -164,12 +164,12 @@ export class UserResolver {
 
   @Mutation()
   @UseGuards(GqlCaslGuard('create', 'update'))
-  async upsertOneUser(
-    @Args() args: UpsertOneUserArgs,
+  async upsertOneMessage(
+    @Args() args: UpsertOneMessageArgs,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Mutation.upsertOneUser(
+    return resolvers.Mutation.upsertOneMessage(
       undefined,
       PrismaSelectArgs(info, args),
       ctx,
@@ -179,12 +179,12 @@ export class UserResolver {
 
   @Mutation()
   @UseGuards(GqlCaslGuard('delete'))
-  async deleteOneUser(
-    @Args() args: DeleteOneUserArgs,
+  async deleteOneMessage(
+    @Args() args: DeleteOneMessageArgs,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Mutation.deleteOneUser(
+    return resolvers.Mutation.deleteOneMessage(
       undefined,
       PrismaSelectArgs(info, args),
       ctx,
@@ -194,12 +194,12 @@ export class UserResolver {
 
   @Mutation()
   @UseGuards(GqlCaslGuard('delete'))
-  async deleteManyUser(
-    @Args() args: DeleteManyUserArgs,
+  async deleteManyMessage(
+    @Args() args: DeleteManyMessageArgs,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Mutation.deleteManyUser(
+    return resolvers.Mutation.deleteManyMessage(
       undefined,
       PrismaSelectArgs(info, args),
       ctx,

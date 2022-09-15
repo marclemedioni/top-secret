@@ -7,6 +7,7 @@ import { promisify } from 'util';
 import { Generator as PalGenerator } from '@paljs/generator';
 import { Config as PalConfig } from '@paljs/types';
 
+import { sdlInputsString } from './sdl-inputs';
 import {
   ClientFieldsTemplate,
   ClientQueriesTemplate,
@@ -14,6 +15,8 @@ import {
   NestResolversABACTemplate,
   NestResolversIndexTemplate,
   NestResolversRBACTemplate,
+  SDLInputsTemplate,
+  TypeDefsTemplate,
 } from './templates';
 
 const execAsync = promisify(exec);
@@ -36,46 +39,50 @@ export class Generator {
   constructor(public config: GeneratorConfig) {}
 
   async run() {
-    const palConfig = this.config.palConfig as any;
-    const PAL_OUT_PATH = palConfig.backend.output;
-    const RESOLVERS_PATH = `${this.config.apiOutPath}/resolvers`;
-
     console.log(`------------------------ @paljs/generator ------------------------`);
-    if (fs.existsSync(PAL_OUT_PATH)) {
-      await rm(PAL_OUT_PATH, { recursive: true });
-      await mkdir(PAL_OUT_PATH);
+    const palConfig = this.config.palConfig as any;
+    const palOutPath = palConfig.backend.output
+      ? palConfig.backend.output
+      : path.join(this.config.apiOutPath, 'paljs');
+    palConfig.backend.output = palOutPath;
+
+    if (fs.existsSync(palOutPath)) {
+      await rm(palOutPath, { recursive: true });
+      await mkdir(palOutPath);
     }
+
+    const inputsString = await sdlInputsString({
+      dmmfOptions: { datamodelPath: this.config.palConfig.schema },
+      doNotUseFieldUpdateOperationsInput:
+        this.config.palConfig.backend?.doNotUseFieldUpdateOperationsInput,
+    });
+
+    const inputOutPath = path.join(palOutPath, 'sdl-inputs.ts');
+    await writeFile(inputOutPath, SDLInputsTemplate(inputsString));
+    console.log(`- Wrote: ${inputOutPath}`);
 
     const pal = new PalGenerator(
       { name: palConfig.backend.generator, schemaPath: palConfig.schema },
       palConfig.backend
     );
     await pal.run();
-
-    /**
-     * Insert `doNotUseFieldUpdateOperationsInput: true` into generated PalJS `typeDefs.ts` file
-     * Refer to: [PalJS GraphQL SDL inputs](https://paljs.com/plugins/sdl-inputs/)
-     */
-    if (palConfig.backend.doNotUseFieldUpdateOperationsInput) {
-      const palTypeDefsFilePath = path.join(PAL_OUT_PATH, 'typeDefs.ts');
-      const palTypeDefsFile = await readFile(palTypeDefsFilePath);
-      const palTypeDefsFileUpdated = palTypeDefsFile
-        .toString()
-        .replace('sdlInputs()', 'sdlInputs({ doNotUseFieldUpdateOperationsInput: true })');
-      await writeFile(palTypeDefsFilePath, palTypeDefsFileUpdated);
-    }
-
-    console.log(`- Wrote: ${this.config.palConfig.backend?.output}`);
-
-    console.log(`---------------- Nest GraphQL resolvers generated ----------------`);
-    if (!fs.existsSync(RESOLVERS_PATH)) {
-      await mkdir(RESOLVERS_PATH);
-    }
+    console.log(`- Wrote: ${palOutPath}`);
 
     // Get Prisma type names via the directory names under the 'prisma' folder;
-    const dirents = await readdir(PAL_OUT_PATH, { withFileTypes: true });
+    const dirents = await readdir(palOutPath, { withFileTypes: true });
     let prismaNames = dirents.filter(d => d.isDirectory()).map(d => d.name);
     prismaNames = prismaNames.sort();
+
+    const palTypeDefsFilePath = path.join(palOutPath, 'typeDefs.ts');
+    await writeFile(palTypeDefsFilePath, TypeDefsTemplate(prismaNames));
+    console.log(`- Wrote: ${palTypeDefsFilePath}`);
+
+    console.log(`---------------- Nest GraphQL resolvers generated ----------------`);
+    const nestResolversPath = path.join(this.config.apiOutPath, 'resolvers');
+
+    if (!fs.existsSync(nestResolversPath)) {
+      await mkdir(nestResolversPath);
+    }
 
     let wroteCount = 0;
     if (!this.config.authScheme || this.config.authScheme === 'ABAC') {
@@ -92,15 +99,15 @@ export class Generator {
     console.log(`* Total resolver files wrote: ${wroteCount}`);
 
     // Get the data type names via the filename of the "resolvers" directory
-    let dataTypeNames = (await readdir(RESOLVERS_PATH))
+    let dataTypeNames = (await readdir(nestResolversPath))
       .filter(f => path.basename(f) !== 'index.ts')
       .map(f => path.basename(f, '.ts')); // Remove ".ts" extension from all names
 
-    const indexPath = `${RESOLVERS_PATH}/index.ts`;
+    const indexPath = path.join(nestResolversPath, 'index.ts');
     await writeFile(indexPath, NestResolversIndexTemplate(dataTypeNames));
     console.log(`- Wrote: ${indexPath}`);
 
-    await this.execLocal(`prettier --loglevel warn --write "${this.config.apiOutPath}/**/*.ts"\n`);
+    await this.execLocal(`prettier --loglevel warn --write "${this.config.apiOutPath}/**/*.ts"`);
 
     await this.generateFrontend(prismaNames);
   }

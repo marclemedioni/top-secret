@@ -80,6 +80,7 @@
     "@nrwl/nx-cloud": "latest",
     "@nrwl/workspace": "14.7.5",
     "@paljs/cli": "^4.1.0",
+    "@prisma/internals": "^4.3.1",
     "@types/graphql-upload": "^8.0.11",
     "@types/jest": "28.1.1",
     "@types/node": "16.11.7",
