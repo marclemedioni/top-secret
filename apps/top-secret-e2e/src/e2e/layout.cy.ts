@@ -1,30 +1,47 @@
-import { contains } from 'cypress/types/jquery';
-import { getGreeting } from '../support/app.po';
-
 describe('login page', () => {
     beforeEach(() => {
-       cy.visit('/');
+      cy.visit('/');
     })
 
-    it('greets with login page',() => {
-        cy.contains('h1', 'Login')
+    it('all informations are present', () => {
+      cy.contains('Home')
+      cy.contains('Menu')
+      cy.contains('Login')
+      cy.contains('Top-secret')
     })
 
     it('allows user to register', () => {
-        cy.contains('h1','Login');
+      cy.contains('h1','Login')
     })
 
+    it('requires valid form',() => {
+      cy.get('input').should('have.class', 'ng-invalid')
+        
+    })
+    
     it('go to page register', () => {
-        cy.get('Button').contains('New Account').click()
+      cy.get('Button').contains('New Account').click()
     })
 
-    it('requires username',()=> {
-        cy.get('input').type('Lagg58')
-        cy.get('E-mail').type('delarrasgeraldine@gmail.com')
-        cy.get('Phone').type('0665757859')
-        cy.get('Password').type('Coyote06*')
-        cy.get('Confirm Password').type('Coyote06*')
+})  
+    
+ describe('create new account', () => {   
+    it('shows register page', () => {
+      cy.url().should('include','register')
+    })
+    
+    it('shows user to register',() => {
+      cy.get('input[placeholder*="Username"]').type('Lagg')
+    })
+
+    it('requires valid form',() =>{
+      cy.get('input').should('have.class', 'ng-invalid')
+      cy.contains('I accept the terms and conditions')
+      cy.get('Button').contains('Submit')
+    })
+
+    it('forgot password', () =>{
+      cy.contains('..')
     })
 
 })
-
