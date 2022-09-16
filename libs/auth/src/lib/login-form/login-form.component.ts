@@ -99,6 +99,10 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+    if (this.form.invalid) {
+      return;
+    }
+
     if (!this.loading) {
       this.loading = true;
       this.generalError = false;
